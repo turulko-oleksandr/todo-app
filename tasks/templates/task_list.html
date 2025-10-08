@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Todo List</h1>
+<a href="{% url 'tasks:task-add' %}">➕ Add Task</a>
+<table>
+    <tr>
+        <th>Content</th>
+        <th>Created</th>
+        <th>Deadline</th>
+        <th>Tags</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    {% for task in tasks %}
+    <tr>
+        <td>{{ task.content }}</td>
+        <td>{{ task.created_at|date:"Y-m-d H:i" }}</td>
+        <td>{{ task.deadline|default:"—" }}</td>
+        <td>{% for tag in task.tags.all %}{{ tag.name }} {% endfor %}</td>
+        <td>{{ task.is_done|yesno:"✅ Done,❌ Not done" }}</td>
+        <td>
+            <a href="{% url 'tasks:task-edit' task.id %}">✏️</a> |
+            <a href="{% url 'tasks:task-delete' task.id %}">🗑️</a> |
+            <a href="{% url 'tasks:task-toggle' task.id %}">
+                {% if task.is_done %}Undo{% else %}Complete{% endif %}
+            </a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6">No tasks yet.</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

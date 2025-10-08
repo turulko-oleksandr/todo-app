@@ -1,2 +1,38 @@
-.venv/
+# Ignore SQLite database
+*.sqlite3
+
+# Ignore compiled Python files
+*.pyc
+__pycache__/
+
+# Ignore virtual environment directories
+venv/
+env/
+
+# Ignore media and static files (if not managed by a separate build process)
+media/
+static/
+
+# Ignore logs and backups
+*.log
+*.bak
+
+# Ignore environment variables and local settings
+.env
+local_settings.py
+
+# Ignore IDE and editor-specific files
+.vscode/
 .idea/
+.DS_Store # macOS specific
+Thumbs.db # Windows specific
+
+# Ignore testing and coverage reports
+.tox/
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Ignore deployment-related files (if not intended for version control)
+*.tar.gz
+*.zip
